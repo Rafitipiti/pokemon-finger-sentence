@@ -2,7 +2,7 @@
 
 - La punta del índice derecho es el cursor.
 - Mantenerlo 3 segundos sobre un recuadro agrega esa palabra a la frase.
-- Poner el brazo en 90 grados envía la frase, y la frase se ejecuta:
+- Poner el brazo izquierdo en 90 grados envía la frase, y esta se ejecuta:
   YO TE ELIJO <pokemon>, USA <ataque>, ¡ESQUIVA!, ¡REGRESA!
 """
 
@@ -25,7 +25,7 @@ from game import Game
 from tracking import AngleHoldTrigger, ArmAngleTracker, IndexFingerTracker, arm_gesture_ok
 
 WINDOW = "Pokédex gestual"
-HINT = ("3 s sobre un recuadro = palabra   |   brazo en 90 grados = enviar la frase   |   "
+HINT = ("3 s sobre un recuadro = palabra   |   brazo IZQUIERDO en 90 grados = enviar   |   "
         "[BACKSPACE] borrar   [C] limpiar   [B] gesto estricto   [M] cambiar brazo   "
         "[S] silencio   [F] pantalla completa   [Q] salir")
 
@@ -172,15 +172,16 @@ def main():
             if dt > 0:
                 fps = fps * 0.9 + (1 / dt) * 0.1 if fps else 1 / dt
 
-            hand_state = "índice detectado" if hand is not None else "sin mano"
+            hand_state = "índice derecho detectado" if hand is not None else "sin mano"
             if angle is None:
-                arm_state = "brazo no visible"
+                arm_state = f"brazo {cfg.ARM_SIDE[:3]}. no visible"
             elif pose_ok:
                 arm_state = f"90 grados ({angle:0.0f}) mantén..."
             elif elbow_ok:
                 arm_state = f"codo {angle:0.0f} ok, sube el brazo ({arm.upper_tilt:0.0f})"
             else:
-                arm_state = f"codo {angle:0.0f} grados"
+                banda = f"{args.arm_angle - args.tolerance:0.0f}-{args.arm_angle + args.tolerance:0.0f}"
+                arm_state = f"codo izq. {angle:0.0f} grados (busca {banda})"
             ui.draw_hud(frame, [hand_state, arm_state,
                                 f"palabras: {len(sentence.words)}",
                                 f"frases: {len(sentence.history)}",

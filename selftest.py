@@ -109,6 +109,13 @@ def test_pose_math():
     assert round(horizontal_tilt((0, 0), (1, 0))) == 0
     assert round(horizontal_tilt((0, 0), (0, 1))) == 90
 
+    # El puntero va con una mano y el envío con el brazo contrario.
+    assert cfg.HAND_SIDE == "right" and cfg.ARM_SIDE == "left", (cfg.HAND_SIDE, cfg.ARM_SIDE)
+    assert cfg.ARM_TOLERANCE == 8.0, cfg.ARM_TOLERANCE
+    banda = AngleHoldTrigger(cfg.ARM_TARGET_ANGLE, cfg.ARM_TOLERANCE, cfg.ARM_HOLD_SECONDS)
+    assert banda.in_band(90.0) and banda.in_band(82.0) and banda.in_band(98.0)
+    assert not banda.in_band(81.0) and not banda.in_band(99.0)
+
     trigger = AngleHoldTrigger(90.0, 20.0, 0.8)
     flex = ArmReading(91.0, 6.0, (0.40, 0.40), (0.60, 0.40), (0.60, 0.10))
     senalando = ArmReading(91.0, 62.0, (0.4, 0.4), (0.45, 0.62), (0.6, 0.45))
@@ -127,7 +134,7 @@ def test_pose_math():
     assert trigger.update(160.0, t + 2.5) is False
     assert trigger.update(90.0, t + 2.6) is False
     assert trigger.update(90.0, t + 3.5) is True
-    print("brazo ..... ok (aspecto corregido; señalar no dispara el envío)")
+    print("brazo ..... ok (envío con el izquierdo, banda 82-98; señalar no dispara)")
 
 
 def test_game():

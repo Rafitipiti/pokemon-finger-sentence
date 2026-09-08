@@ -5,7 +5,8 @@ Das órdenes Pokémon apuntando recuadros con el dedo, frente a la cámara.
 - La punta de tu **dedo índice derecho** es el cursor.
 - Mantenlo **3 segundos** sobre un recuadro y esa palabra se suma a la frase,
   que se va escribiendo en la barra de abajo.
-- Pon el **brazo en 90 grados** para **enviar la frase**. La frase no solo se
+- Pon el **brazo izquierdo en 90 grados** para **enviar la frase**. Cada brazo
+  tiene su papel: el derecho apunta, el izquierdo envía. La frase no solo se
   guarda: **se ejecuta**.
 
 ```bash
@@ -93,13 +94,16 @@ python main.py --no-mirror
 
 ## El gesto para enviar
 
-El brazo "en 90 grados" se mide como el ángulo del **codo**
-(hombro-codo-muñeca), con ±20 grados de tolerancia, mantenido 0.8 segundos.
+Se envía **con el brazo izquierdo**, el contrario al que apunta, para que
+señalar un recuadro no dispare el envío sin querer. Se mide como el ángulo del
+**codo** izquierdo (hombro-codo-muñeca), con ±8 grados de tolerancia (banda de
+**82 a 98 grados**), mantenido 0.8 segundos.
 
 Como al señalar los recuadros el codo también queda cerca de 90 grados, por
-defecto se exige la postura completa: **brazo horizontal y antebrazo hacia
-arriba** (como marcar bíceps). Si te resulta incómodo, pulsa `B` o arranca con
-`--loose-arm`. El HUD dice en todo momento qué ve el programa
+defecto se exige además la postura completa: **brazo horizontal y antebrazo
+hacia arriba** (como marcar bíceps). Si te resulta incómodo, pulsa `B` o
+arranca con `--loose-arm`. Y si ±8 grados te queda muy fino, ábrelo con
+`--tolerance 15` o cambia `ARM_TOLERANCE` en `config.py`. El HUD dice en todo momento qué ve el programa
 (`codo 92 ok, sube el brazo (48)`), así que es fácil calibrar.
 
 ## Ajustes

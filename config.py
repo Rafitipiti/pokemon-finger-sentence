@@ -63,7 +63,7 @@ TYPE_COLORS = {
 COLOR_POKEMON = (90, 210, 255)    # ambar
 COLOR_COMMAND = (200, 220, 120)   # verde menta
 
-# --- Mano que se rastrea ---
+# --- Mano que se rastrea (el puntero) ---
 HAND_SIDE = "right"
 STRICT_HAND_SIDE = True     # True: ignora la otra mano
 HAND_MIN_DETECTION = 0.6
@@ -74,9 +74,11 @@ DWELL_SECONDS = 3.0
 LOST_GRACE_SECONDS = 0.35   # tolera perder el dedo un instante sin reiniciar
 
 # --- Gesto "brazo en 90 grados" para enviar la frase ---
-ARM_SIDE = "right"
+# El envio va con el brazo contrario al del puntero: se apunta con el derecho
+# y se envia con el izquierdo, asi ningun gesto pisa al otro.
+ARM_SIDE = "left"
 ARM_TARGET_ANGLE = 90.0
-ARM_TOLERANCE = 20.0
+ARM_TOLERANCE = 8.0         # banda estrecha: 82-98 grados
 ARM_HOLD_SECONDS = 0.8
 # Al senalar los recuadros el codo ya queda cerca de 90 grados, asi que por
 # defecto se exige la postura completa: brazo horizontal y antebrazo hacia
