@@ -1,0 +1,6 @@
+opencv-python>=4.8
+mediapipe>=0.10.9,<0.11
+numpy>=1.24,<2
+pillow>=10            # texto con acentos y lectura de los GIF animados
+sounddevice>=0.4.6    # salida de audio (ya viene con mediapipe)
+soundfile>=0.12       # para decodificar los gritos .ogg de PokeAPI

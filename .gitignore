@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+# Recursos descargados de PokeAPI (los baja assets.py en el primer arranque)
+assets/
+# Salidas de la sesion
+frases.txt
+preview*.png
+live_check.png
