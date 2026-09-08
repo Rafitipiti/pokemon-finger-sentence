@@ -127,6 +127,11 @@ Probado en Windows 11 con Python 3.12, mediapipe 0.10.21, OpenCV 4.11,
 Pillow 12 y soundfile 0.14. Si `soundfile` falta, el juego funciona igual y los
 gritos se reemplazan por un efecto sintetizado.
 
+**Necesita Python 3.12**: mediapipe 0.10.x no publica wheels para 3.13 ni 3.14.
+Si tienes varias versiones instaladas, `py main.py` puede caer en la más nueva
+y fallar con `ModuleNotFoundError: No module named 'mediapipe'`. Usa
+`python main.py`, `py -3.12 main.py` o el `jugar.bat`.
+
 ## Prueba sin cámara
 
 ```bash
